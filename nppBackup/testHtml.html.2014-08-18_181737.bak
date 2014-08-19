@@ -301,10 +301,10 @@
 					<a class="button" href="#home" onclick="showRestaurant(&quot;OutputSection&quot;);" >
 						Show List of Establishments</a></li>
 				<li>
-					<a class="button" href="#home" onclick="formSearchRestaurant(&quot;searchRestaurantUnsecure&quot;);" >
+					<a class="button" href="#home" onclick="formSearchRestaurant(&quot;searchHotelUnsecure&quot;);" >
 						Search for a Happy Hour using SQL Injection Vulnerable Code</a></li>
 				<li>
-					<a class="button" href="#home" onclick="formSearchRestaurant(&quot;searchRestaurantSecure&quot;);" >
+					<a class="button" href="#home" onclick="formSearchRestaurant(&quot;searchHotelSecure&quot;);" >
 						Search for a Hotel using Secure Code</a></li>
 			</ul>
 			</div>

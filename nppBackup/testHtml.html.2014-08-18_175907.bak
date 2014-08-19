@@ -77,7 +77,7 @@
 				var strHTML = new String();
 				strHTML += "<form name=\"SearchRestaurant\">";
 				strHTML += "<h2>Search for Restaurant On City (Secure - Not Vulnerable to SQL Injection)</h2>";
-				strHTML += "<p>City: <input name=\"CityName\" type=\"text\" width=\"50\"/></p>";
+				strHTML += "<p>City: <input name=\"city\" type=\"text\" width=\"50\"/></p>";
 				strHTML += "<p>Try <em>Seattle</em> (Normal User Input) versus <em>Seattle' OR ''='</em> (SQL Injection Attack)></p>";
 				strHTML += "<input value=\"Search\" type=\"button\" onClick=\"";
 				strHTML += outputFunction;
@@ -117,7 +117,7 @@
 				oCommand.ActiveConnection = oConnection;
 				oCommand.CommandText = strSQL;
 				var parm1 = oCommand.CreateParameter("CityParameter",200,1,50);
-				parm1.Value = document.forms("SearchRestaurant").item("CityName").value;
+				parm1.Value = document.forms("SearchRestaurant").item("city").value;
 				oCommand.Parameters.Append(parm1);
 				
 				// Execute Command and Return Resulting Record Set
@@ -128,8 +128,7 @@
 				strHTML += "<table width=\"100%\">"
 				while (!rsQuery.EOF)
 				{
-					strHTML += "<tr><td>" + 
-						rsQuery("RestaurantName") + "</td><td>" +
+					strHTML += "<tr><td>" + rsQuery("RestaurantName") + "</td><td>" +
 						rsQuery("CityName") + "</td></tr>";
 					rsQuery.MoveNext();
 				}
@@ -162,9 +161,8 @@
 				
 				// Execute a Read Only Query - Subject To SQL INJECTOR Errors
 				var strSQL = new String();
-				strSQL = "SELECT * FROM Restaurant WHERE CityName= \"" +
-					document.forms("SearchRestaurant").item("CityName").value + "\" ORDER BY RestaurantName";
-				console.log(strSQL);
+				strSQL = "SELECT * FROM Restaurant WHERE CityName='" +
+					document.forms("SearchRestaurant").item("city").value + "' ORDER BY RestaurantName";
 				var rsQuery = oConnection.Execute(strSQL);
 				
 				// Generate HTML Table with Query Results
@@ -172,8 +170,7 @@
 				strHTML += "<table width=\"100%\">"
 				while (!rsQuery.EOF)
 				{
-					strHTML += "<tr><td>" + 
-						rsQuery("RestaurantName") + "</td><td>" +
+					strHTML += "<tr><td>" + rsQuery("RestaurantName") + "</td><td>" +
 						rsQuery("CityName") + "</td></tr>";
 					rsQuery.MoveNext();
 				}
@@ -301,10 +298,10 @@
 					<a class="button" href="#home" onclick="showRestaurant(&quot;OutputSection&quot;);" >
 						Show List of Establishments</a></li>
 				<li>
-					<a class="button" href="#home" onclick="formSearchRestaurant(&quot;searchRestaurantUnsecure&quot;);" >
+					<a class="button" href="#home" onclick="formSearchRestaurant(&quot;searchHotelUnsecure&quot;);" >
 						Search for a Happy Hour using SQL Injection Vulnerable Code</a></li>
 				<li>
-					<a class="button" href="#home" onclick="formSearchRestaurant(&quot;searchRestaurantSecure&quot;);" >
+					<a class="button" href="#home" onclick="formSearchRestaurant(&quot;searchHotelSecure&quot;);" >
 						Search for a Hotel using Secure Code</a></li>
 			</ul>
 			</div>
